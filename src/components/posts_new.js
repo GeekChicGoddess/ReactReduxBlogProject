@@ -25,8 +25,8 @@ renderField(field) {
                 <Field name="title"
                        label="Title For Post"
                 component={this.renderField}/>
-                <Field name="tags"
-                       label="Tags"
+                <Field name="categories"
+                       label="Categories"
                 component={this.renderField}/>
                 <Field name="content"
                        label="Post Content"
@@ -37,9 +37,26 @@ renderField(field) {
 
         );
     }
+}
+
+function validate(values) {
+
+    const errors = {};
+    if(!values.title || values.title.length < 3){
+        errors.title = "Enter a title that is more than 2 characters!";
+    }
+    if(!values.categories){
+        errors.categories = "Enter a category!";
+    }
+     if(!values.content){
+        errors.content = "Enter some blog content!";
+    }
+
+    return errors;
 
 }
 
 export default reduxForm({
-    form: 'PostsNewForm'
+    form: 'PostsNewForm',
+    validate
 })(PostsNew);
